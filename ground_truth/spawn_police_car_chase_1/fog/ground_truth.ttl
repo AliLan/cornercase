@@ -1,0 +1,53 @@
+@prefix avcco: <http://cornercase.org/avcco#> .
+@prefix ex: <http://cornercase.org/instances#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:WeatherObs1 a avcco:Observation ;
+    avcco:hasConfidenceScore 9e-01 ;
+    avcco:hasWeatherCondition avcco:Fog ;
+    prov:wasGeneratedBy ex:vehicleEgo_activity .
+
+ex:Obs1 a avcco:Observation ;
+    avcco:hasConfidenceScore 8.0e-01 ;
+    avcco:refersTo ex:FleeVehicle ;
+    prov:wasGeneratedBy ex:vehicleEgo_activity .
+
+ex:Obs2 a avcco:Observation ;
+    avcco:hasConfidenceScore 8.0e-01 ;
+    avcco:refersTo ex:PoliceVehicle ;
+    prov:wasGeneratedBy ex:vehicleEgo_activity .
+
+ex:FleeVehicle a avcco:Vehicle ;
+    avcco:hasRelativePosition "front" .
+
+ex:PoliceVehicle a avcco:Vehicle ;
+    avcco:hasRelativePosition "front" .
+
+ex:ChaseEvent a avcco:BehaviorAnomaly ;
+    avcco:hasActor ex:FleeVehicle ;
+    avcco:hasConfidenceScore 9e-01 ;
+    prov:wasGeneratedBy ex:vehicleEgo_activity .
+
+ex:CC1 a avcco:SensorBlindSpotCase ;
+    avcco:hasActor ex:VehicleEgo ;
+    avcco:hasObstacle ex:FleeVehicle ;
+    avcco:hasTriggerEvent ex:Occ1 ;
+    avcco:hasConfidenceScore 8.0e-01 ;
+    prov:wasGeneratedBy ex:vehicleEgo_activity .
+
+ex:Occ1 a avcco:OcclusionEvent ;
+    avcco:hasOccluder ex:FleeVehicle ;
+    avcco:hasOccludedEntity ex:PoliceVehicle ;
+    avcco:hasConfidenceScore 7.5e-01 ;
+    prov:wasGeneratedBy ex:vehicleEgo_activity .
+
+ex:LowVisObs1 a avcco:Observation ;
+    avcco:hasConfidenceScore 8.5e-01 ;
+    avcco:refersTo avcco:LowVisibility ;
+    prov:wasGeneratedBy ex:vehicleEgo_activity .
+
+ex:VehicleEgo a prov:Agent .
+
+ex:vehicleEgo_activity a prov:Activity ;
+    prov:wasAssociatedWith ex:VehicleEgo .

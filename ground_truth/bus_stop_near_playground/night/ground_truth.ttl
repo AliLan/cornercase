@@ -1,0 +1,56 @@
+@prefix avcco: <http://cornercase.org/avcco#> .
+@prefix ex: <http://cornercase.org/instances#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:WeatherObs1 a avcco:Observation ;
+    avcco:hasConfidenceScore 9e-01 ;
+    avcco:hasWeatherCondition avcco:Night ;
+    prov:wasGeneratedBy ex:vehicleA_activity .
+
+ex:Obs1 a avcco:Observation ;
+    avcco:hasConfidenceScore 9e-01 ;
+    avcco:refersTo ex:Bus1 ;
+    prov:wasGeneratedBy ex:vehicleA_activity .
+
+ex:Obs2 a avcco:Observation ;
+    avcco:hasConfidenceScore 7.5e-01 ;
+    avcco:refersTo ex:Pedestrian1 ;
+    prov:wasGeneratedBy ex:vehicleA_activity .
+
+ex:Obs3 a avcco:Observation ;
+    avcco:hasConfidenceScore 6.5e-01 ;
+    avcco:refersTo ex:Pedestrian2 ;
+    prov:wasGeneratedBy ex:vehicleA_activity .
+
+ex:Bus1 a avcco:Bus ;
+    avcco:hasRelativePosition "front" .
+
+ex:Pedestrian1 a avcco:Pedestrian ;
+    avcco:isOccludedBy ex:Bus1 .
+
+ex:Pedestrian2 a avcco:Pedestrian ;
+    avcco:isOccludedBy ex:Bus1 .
+
+ex:CC1 a avcco:SensorBlindSpotCase ;
+    avcco:hasActor ex:VehicleA ;
+    avcco:hasObstacle ex:Bus1 ;
+    avcco:hasTriggerEvent ex:Occ1 ;
+    avcco:hasConfidenceScore 8.5e-01 ;
+    prov:wasGeneratedBy ex:vehicleA_activity .
+
+ex:Occ1 a avcco:OcclusionEvent ;
+    avcco:hasOccluder ex:Bus1 ;
+    avcco:hasOccludedEntity ex:Pedestrian1, ex:Pedestrian2 ;
+    avcco:hasConfidenceScore 8.0e-01 ;
+    prov:wasGeneratedBy ex:vehicleA_activity .
+
+ex:NightObs1 a avcco:Observation ;
+    avcco:hasConfidenceScore 8.5e-01 ;
+    avcco:refersTo avcco:Night ;
+    prov:wasGeneratedBy ex:vehicleA_activity .
+
+ex:VehicleA a prov:Agent .
+
+ex:vehicleA_activity a prov:Activity ;
+    prov:wasAssociatedWith ex:VehicleA .
